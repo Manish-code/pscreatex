@@ -22,6 +22,49 @@
       <button onclick="window.location.href = 'https://readingatmypace.netlify.app/blog';>Launching Soon!</button>
     </div>
   </div>
+                       
+                       
+                       
+ 
+    <h1>Download  Book</h1>
+    <form>
+      <label for="book-url">the letters of vincent van gogh</label>
+      <input type="text" id="book-url" name="book-url">
+      <br>
+      <button type="button" onclick="downloadBook()">Download</button>
+    </form>
+    
+    <script>
+      function downloadBook() {
+        // Get the book URL from the input field
+        var bookUrl = document.getElementById('book-url').value;
+
+        // Set the headers for the download
+        var headers = {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': 'attachment; filename="book.pdf"'
+        };
+
+        // Use the Fetch API to download the book
+        fetch(bookUrl, {headers})
+          .then(response => response.blob())
+          .then(blob => {
+            // Create a URL for the downloaded file
+            var url = window.URL.createObjectURL(blob);
+
+            // Create a link to the file and click it to initiate the download
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'book.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          })
+          .catch(error => console.error(error));
+      }
+    </script>
+ 
+
   <script src="./public/scripts/canvas.js"></script>
   <script src="./public/scripts/dat.gui.min.js"></script>
   <script src="./public/scripts/script.js"></script>
