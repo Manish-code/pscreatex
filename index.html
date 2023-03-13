@@ -7,7 +7,27 @@
   <link rel="stylesheet" href="./public/styles/div.css">
   <link rel="stylesheet" href="./public/styles/root.css">
   <link rel="stylesheet" href="./public/styles/canvas.css">
-  
+
+
+<style>
+  .interactive-button {
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .interactive-button:hover {
+    background-color: #005ea6;
+  }
+
+  .interactive-button:active {
+    background-color: #004b8c;
+  }
+</style>
 
   <title>PSCREATEX</title>
 </head>
@@ -24,7 +44,7 @@
       <label for="book-url">the letters of vincent van gogh</label>
       
       <br>
-      <button type="button" onclick="downloadBook()">Download</button>
+    <button class="interactive-button"type="button" onclick="downloadBook()">Download</button>
     </form>
     </div>
   </div>
@@ -36,25 +56,22 @@
     
     <script>
       function downloadBook() {
-        // Get the book URL from the input field
-        var bookUrl = document.getElementById('book-url').value;
-
+        
+var bookUrl = 'book.pdf';
+var filepath = '/' + filename;
         // Set the headers for the download
         var headers = {
           'Content-Type': 'application/pdf',
-          'Content-Disposition': 'attachment; filename="book.pdf"'
+          'Content-Disposition': 'attachment; filename="The letters of vincent van gogh.pdf"'
         };
 
         // Use the Fetch API to download the book
         fetch(bookUrl, {headers})
           .then(response => response.blob())
           .then(blob => {
-            // Create a URL for the downloaded file
-            var url = window.URL.createObjectURL(blob);
-
-            // Create a link to the file and click it to initiate the download
+           
             var link = document.createElement('a');
-            link.href = url;
+            link.href = filepath;
             link.download = 'book.pdf';
             document.body.appendChild(link);
             link.click();
