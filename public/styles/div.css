@@ -35,3 +35,12 @@ body {
     margin-left: 10vw;
    margin-top: 42vh;
   }
+
+svg {
+    
+    z-index: 10;
+    background: #009938;
+    opacity: 0.6;
+    margin-left: 10vw;
+   margin-top: 42vh;
+  }
